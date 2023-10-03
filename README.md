@@ -1,1 +1,1 @@
-<h2>WAS III - Windows Administration Security</h2>
+<h1>WAS III - Windows Administration Security</h1>
