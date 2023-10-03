@@ -1,0 +1,345 @@
+WAS 3 -  WINDOWS ADMINISTRATION SECURITY
+
+Your company has received a new contract to plan and configure their new office structure, and you have been tasked to setup a Sandbox environment with servers and a workstation to begin testing Proof of Design network infrastructure. You will be creating Several virtual machines to run in the Sandbox.
+
+Part 1: IP Structure                                                               
+You will be subnetting 10.0.0.0/24 for the Sandbox network.
+The first usable IP address of the “Servers and Workstations” subnet will be used as the gateway IP address for the Servers and Workstations
+You will need to subnet your network with the following information, please create a VLSM structure for your Sandbox:
+Infrastructure:                              9
+
+Servers and Workstations:        120
+
+Printers:                                       15
+
+Wireless Aps:                               32               
+
+Task 1. Enter your VLSM in the table provided in the workbook attached
+
+Question 1: If the population of the network doubles, what will the Network ID and CIDR be? (Enter your answer in the workbook attached)
+
+Part 2: Virtualization                                                            
+Create a switch labelled WAS3-Proj-YOURFIRSTNAME-SW, on the Windows 10 Host machine (Please be sure to change “YOURFIRSTNAME” to your first name
+Run the PowerShell cmdlets
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+then
+
+Get-VMSwitch -Name "WAS3Project*"
+
+3. Take a screenshot and paste it in the workbook attached
+
+Task 2. Provide the screenshot in the workbook attached
+
+
+4. Create 3 virtual machines connected to the WAS3-Proj-YOURFIRSTNAME-SW switch with 2048 MB RAM on each, and labelled as follows, replacing “YOURFIRSTNAME” with your first name:
+
+WAS3 Project DC1.YOURFIRSTNAME.com
+WAS3 Project SVR1.YOURFIRSTNAME.com
+WAS3 Project WS1.YOURFIRSTNAME.com
+
+5. On your Windows 10 workstation, run the PowerShell cmdlets
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}  
+then  
+Get-VM -Name "*Project*"
+
+6.Take a screenshot and paste it in the workbook attached
+
+Task 3. Provide the screenshot in the workbook attached
+
+Question 2: What full Powershell command will create the virtual switch in this section? (Enter your answer in the workbook attached)
+
+Question 3: When should you use the .vhdx format instead of .vhd format? (Enter your answer in the workbook attached)
+
+Part 3: Installation and Configuration                                 
+1. Install the operating systems with the following common configurations:
+
+Subnet Mask: of the Servers and Workstations Subnet
+DNS: Second IP of the Servers and Workstations subnet
+Gateway: First IP of the Servers and Workstations subnet
+Enable: Remote desktop without network level authentication
+Change: the time zone and time settings so the time is correct
+Local Administrator account: “LocalYOURFIRSTNAME” replace “YOURFIRSTNAME” with your first name *** Make sure it has the same privileges as the Default Administrator Account, and so the password never expires.
+2. Setup the VIRTUAL MACHINE: WAS3 Project DC1.YOURFIRSTNAME.com with the following information:
+
+OPERATING SYSTEM:  Server 2016 Datacenter with GUI
+IP: Second IP of the Servers and Workstations subnet
+Change: The hostname of the server to DC1
+As a security measure log into the Local Administrator account you created in step 1
+a. In Server Manager take a screenshot of the properties area of the local server and paste it in the workbook attached
+
+Task 4. Provide the screenshot in the workbook attached
+
+b. Open an administrative PowerShell prompt and type the following PowerShell cmdlets:
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+Then
+
+Get-NetIPConfiguration
+
+Then
+
+
+Get-NetIPAddress | Format-Table
+
+c. Take a screenshot and paste it in the workbook attached
+
+Task 5. Provide the screenshot in the workbook attached
+
+3. Setup the VIRTUAL MACHINE: WAS3 Project SVR1.YOURFIRSTNAME.com with the following information:
+
+OPERATING SYSTEM:  Server 2016 Datacenter with GUI
+IP: Third IP of the Servers and Workstations subnet
+Change: The hostname of the server to SVR1
+As a security measure log into the Local Administrator account you created in step 1
+a. In Server Manager take a screenshot of the properties area of the local server and paste it in the workbook attached
+
+Task 6. Provide the screenshot in the workbook attached
+
+b. Open an administrative PowerShell prompt and type the following PowerShell cmdlets:
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+then
+
+Get-NetIPConfiguration
+
+then
+
+Get-NetIPAddress | Format-Table
+
+c. Take a screenshot and paste it in the workbook attached
+
+Task 7. Provide the screenshot in the workbook attached
+
+4. Setup the VIRTUAL MACHINE: WAS3 Project WS1.YOURFIRSTNAME.com with the following information:
+
+OPERATING SYSTEM:  Windows 10 Pro
+IP: Fourth IP of the Servers and Workstations subnet
+Change: The hostname of the server to WS1
+As a security measure log into the Local Administrator account you created in step 1
+a. In System Properties take a screenshot showing that Remote desktop is enabled, and paste it in the workbook attached
+
+Task 8. Provide the screenshot in the workbook attached
+
+5. Open an administrative PowerShell prompt and type the following PowerShell cmdlets:
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+Then
+
+Hostname
+
+Then
+
+Get-timezone
+
+Then
+
+Get-NetIPConfiguration
+
+Then
+
+Get-NetIPAddress | Format-Table
+
+ c. Take a screenshot of all three commands and paste it in the workbook attached
+
+Task 9. Provide the screenshot in the workbook attached
+
+Question 4: A user returning from holidays has attempted to login 6 times, the account is locked out. Which Powershell command will you need to execute to allow the user to log into the domain again? (Enter your answer in the workbook attached)
+
+Question 5: What Powershell cmdlet would you use to start an interactive session with a remote computer by the name of WS1? (Enter your answer in the workbook attached)
+
+ 
+
+Part 4: DNS                                                                            
+Install the DNS role on DC1
+Create the Domain called YOURFIRSTNAME.com replacing “YOURFIRSTNAME” with your first name
+Make sure that you allow both secure and nonsecure dynamic updates
+Enable Reverse lookup zone for your domain
+Make sure that you allow both secure and nonsecure dynamic updates
+Create zone records:
+An A record for DNS1 pointing to the IP if DC1
+An A record for RTR1 which points to the first IP address of the Servers and Workstations subnet
+
+7. Open an administrative PowerShell prompt
+
+a. Type the following Powershell cmdlets:
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+Then
+
+Get-DnsServerResourceRecord -ZoneName YOURFIRSTNAME.com
+
+Then
+
+Get-DnsServerResourceRecord -ComputerName DC1 -ZoneName "0.0.10.in-addr.arpa"
+
+b. Take a screenshot and paste it in the workbook attached
+
+Task 10. Provide the screenshot in the workbook attached
+
+Question 6: List 2 record types that are found on an AD DS integrated DNS that you wouldn’t find on a public DNS server (Enter your answer in the workbook attached)
+
+Part 5: AD DS                                                                        
+Install the AD DS role on DC1
+a. Log into the DC1 as the local administrator account
+b. Promote to be a domain controller
+c. Create a Domain in a new forest called YOURFIRSTNAME.com replacing “YOURFIRSTNAME” with your first name using integrated DNS
+d. Use the Administrator account for Delegation
+e. Login as YOURFIRSTNAME\Administrator (replacing “YOURFIRSTNAME” with your first name)
+f. Open an administrative PowerShell prompt, and type the following Powershell cmdlets:
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+Then
+
+Get-WindowsFeature | Where-Object {$_. name -eq "DNS"} | Format-List Name,Installstate
+
+Then
+
+Get-WindowsFeature | Where-Object {$_. name -eq "AD-Domain-Services"} | Format-List Name,Installstate
+
+g. Take a screenshot in the workbook attached
+
+Task 11. Provide the screenshot in the workbook attached
+
+2. Create an OU called IT
+
+a. Create your own Administrative account in the IT OU called YOURFIRSTNAME-IT replacing “YOURFIRSTNAME” with your first name, with the same memberships as the administrator account
+b. Log into the domain controller with your YOURFIRSTNAME-IT account you created
+c. You must only use this account for the remainder of the project
+d. Create the OUs in the root of the domain: Administration, Shipping, Finance, and Sales
+e. Open an administrative PowerShell prompt, and type the following Powershell cmdlets:
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+Then
+
+Get-ADOrganizationalUnit -Filter 'Name -like "*"' | Format-Table Name, DistinguishedName
+
+f. Take a screenshot in the workbook attached
+
+Task 12. Provide the screenshot in the workbook attached
+
+3. Create a Global Security group for each OU
+
+a. Use the name of the OU and add “Group” to the end of the group name (IT Group")
+b. Open an administrative PowerShell prompt, and type the following Powershell cmdlets:
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+Then
+
+Get-ADGroup -Filter 'Name -like "*Group"' | Format-Table  Name, Distinguishedname
+
+c. Take a screenshot in the workbook attached
+
+Task 13. Provide the screenshot in the workbook attached
+
+4. Create a template account for each of the OU’s you have created starting with the unique characters: --
+
+a. Each must be labelled –OU NAME-Template (Replace OU NAME with the name of the OU)
+b. Each must be added as a member of the OU’s group
+c. The template accounts must be disabled
+d. Open an administrative PowerShell prompt, and type the following Powershell cmdlets:
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+Then
+
+Get-ADUser -Filter 'Name -like "--*"' | Format-Table  Name, Distinguishedname,Enabled
+
+e. Take a screenshot in the workbook attached
+
+Task 14. Provide the screenshot in the workbook attached
+
+Question 7: When is a user's access token created? (Enter your answer in the workbook attached)
+
+Question 8: What is the interface within Active Directory Administrative Center that simplifies the delegation of permissions for domains, OUs, or containers? (Enter your answer in the workbook attached)
+Question 9: Which term is described as the process of configuring one or more groups as members of another group? (Enter your answer in the workbook attached)
+
+ 
+
+Part 6: Join Computers to the domain                                 
+Create an OU called Servers, and one called Workstations
+Join SVR1 and WS1 to the Domain
+Move SVR1 to the Servers OU
+Move WS1 to the Workstations OU
+Log into DC1 with your YOURFIRSTNAME-IT account you created
+Open an administrative PowerShell prompt, and type the following Powershell cmdlets:
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+Then
+
+get-adcomputer -filter 'Name -like "*"' | FT DNSHostName,Enabled,DistinguishedName,SID
+
+Take a screenshot in the workbook attached
+
+Task 15. Provide the screenshot in the workbook attached
+
+Question 10 What is the syntax command-line utility for joining a domain using Netdom.exe? (Enter your answer in the workbook attached)
+
+Question 11 List an example of two graphical tool in Windows Server 2016 that can create user objects. (Enter your answer in the workbook attached)
+
+ Part 7: Group Policy                                                             
+Create a Group Policy Object called “Workstations”:
+a. Folder Redirection
+
+ i. Redirect all users’ Documents folder to their own folder on a hidden share called Staff on SVR1’s C:\ drive
+
+2. Modify the Default Domain Policy with the following settings:
+
+a. Password Policy:
+
+i. Enforce Password History:          12 passwords remembered
+
+ii. Max Password Age:                       32 Days
+
+iii. Minimum Password Age:             10 Days
+
+iv. Minimum Password Length:        10 Characters
+
+v. Complexity requirements:          Enabled
+
+b. Account Lockout policy
+
+i. Threshold:                                      5 Attempts
+
+ii. User will be locked out until manually reset
+
+3. Log into WS1 as your YOURFIRSTNAME-IT account you created
+
+4. Take a screenshot of:
+
+a. The Default Domain Policy GPO displaying the Password Policy, and Account Lockout Policy
+
+b. The Workstations GPO displaying the Folder Redirection Policy
+
+Task 16. Provide the screenshot in the workbook attached
+
+Part 8: AD CS                                                                         
+
+Install the AD CS Certification Authority Role on SVR1
+a. Key Length 4096
+b. SHA256 Hash Algorithm
+c. Leave the default for the Common Name for this CA
+
+2. Open an administrative PowerShell prompt, and type the following Powershell cmdlets:
+
+function global:prompt {[Environment]::MachineName+" "+[Environment]::UserName+" PS> "}
+
+Then
+
+Get-CACrlDistributionPoint
+
+3. Take a screenshot in the workbook attached
+
+Task 17. Provide the screenshot in the workbook attached
+
+Part 9: IPv6 Subnetting
+
+The Sandbox network will also require the use of IPv6 for future use when the company transitions to it. Using the standard IPv6 addressing and its built in subnets, create a subnetting scheme for future use with the Sandbox. Use ULA addresses for this IP architecture.
